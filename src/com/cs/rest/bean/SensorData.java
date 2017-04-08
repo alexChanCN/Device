@@ -4,13 +4,18 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
 import java.util.Date;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
 import com.cs.rest.bean.Product;
 
 /**
  *        
  */
 
-
+@Entity
 public class SensorData implements Serializable {
     @JsonIgnore
     private long id;
@@ -68,6 +73,8 @@ public class SensorData implements Serializable {
     @JsonIgnore
     private int productId;
 
+    @Id
+    @GeneratedValue
     public long getId() {
         return id;
     }

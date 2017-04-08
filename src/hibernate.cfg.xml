@@ -31,5 +31,7 @@
  
         <mapping class="com.cs.rest.bean.DeviceFaultInfo"/>
         <mapping class="com.cs.rest.bean.Product"/>
+        <mapping class="com.cs.rest.bean.Data2Device"/>
+        <mapping class="com.cs.rest.bean.SensorData"/>
     </session-factory>
 </hibernate-configuration>

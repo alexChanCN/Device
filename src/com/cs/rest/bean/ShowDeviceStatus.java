@@ -1,7 +1,5 @@
 package com.cs.rest.bean;
 
-import javax.persistence.ManyToOne;
-
 public class ShowDeviceStatus {
 
 	private int productId;					//产品ID

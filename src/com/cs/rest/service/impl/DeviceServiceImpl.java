@@ -1,10 +1,12 @@
 package com.cs.rest.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
 
+import com.cs.rest.bean.Data2Device;
 import com.cs.rest.bean.DeviceFaultInfo;
 import com.cs.rest.bean.Product;
 import com.cs.rest.bean.ShowDeviceStatus;
@@ -45,24 +47,7 @@ public class DeviceServiceImpl implements DeviceService{
 			}
 				
 		}
-		
-		for(ShowDeviceStatus status : statusList){	
-			System.out.println("-------------------------------------");
-			System.out.println("ProductId:  " + status.getProductId());
-			System.out.println("ProductName:  " + status.getProductName());
-			System.out.println("StorageLiquid:  " + status.isStorageLiquid());
-			System.out.println("StoragePressure:  " + status.isStoragePressure());
-			System.out.println("GasifyPressure:  " + status.isGasifyPressure());
-			System.out.println("GasifyTemperature:  " + status.isGasifyTemperature());
-			System.out.println("GPS:  " + status.isGPS());
-			System.out.println("MassFlow:  " + status.isMassFlow());
-			System.out.println("carLiquid:  " + status.isCarLiquid());
-			System.out.println("CarPressure:  " + status.isCarPressure());
-			System.out.println("WeighFlow:  " + status.isWeighFlow());
-			System.out.println("GasFlow2:  " + status.isGasFlow2());
-			System.out.println("ZBOX:  " + status.isZBOX());
-		}
-		
+			
 		return statusList;
 	}
 	@Override
@@ -94,6 +79,27 @@ public class DeviceServiceImpl implements DeviceService{
 			status.setZBOX(true);	
 		else 
 			System.out.println("no device to dataId");
+	}
+	@Override
+	public List<DeviceFaultInfo> getFaultInfo(int productId) {
+		
+		return deviceDao.getFaultInfo(productId);
+	}
+	@Override
+	public String getDataName(int dataId) {
+		
+		String dataName = null;
+		List<Data2Device> dds = deviceDao.getData2Device();
+		for(Data2Device d : dds){
+			if(d.getDataId() == dataId)
+				dataName = d.getDataName();
+		}
+		return dataName;
+	}
+	@Override
+	public List<Object> getData(int productId, int dataId, String start, String limit) {
+		// TODO Auto-generated method stub
+		return deviceDao.getData(productId, dataId, start, limit);
 	}
 
 
