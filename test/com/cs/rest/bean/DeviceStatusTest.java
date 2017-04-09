@@ -101,10 +101,6 @@ public class DeviceStatusTest {
 						status.setCarLiquid(true);
 					else if(dataId == 35)
 						status.setCarPressure(true);
-					else if(dataId >= 36 &&  dataId <= 38)
-						status.setWeighFlow(true);
-					else if(dataId >= 39 &&  dataId <= 42)
-						status.setGasFlow2(true);
 					else if(dataId == 43)
 						status.setZBOX(true);
 				}
@@ -137,8 +133,6 @@ public class DeviceStatusTest {
 			System.out.println("MassFlow:  " + status.isMassFlow());
 			System.out.println("carLiquid:  " + status.isCarLiquid());
 			System.out.println("CarPressure:  " + status.isCarPressure());
-			System.out.println("WeighFlow:  " + status.isWeighFlow());
-			System.out.println("GasFlow2:  " + status.isGasFlow2());
 			System.out.println("ZBOX:  " + status.isZBOX());
 		}
 			
@@ -159,6 +153,5 @@ public class DeviceStatusTest {
 		
 		
 	}
-	
 	
 }

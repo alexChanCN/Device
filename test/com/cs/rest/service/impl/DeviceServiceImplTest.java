@@ -10,14 +10,15 @@ import java.util.List;
 import org.junit.Test;
 
 import com.cs.rest.bean.DeviceFaultInfo;
+import com.cs.rest.bean.ShowData;
 import com.cs.rest.bean.ShowDeviceStatus;
 
 public class DeviceServiceImplTest {
 
-	private DeviceServiceImpl dsi = new DeviceServiceImpl();
+	private DeviceServiceImpl service = new DeviceServiceImpl();
 	@Test
 	public void test() {
-		List<ShowDeviceStatus> statusList = dsi.getDeviceStatus();
+		List<ShowDeviceStatus> statusList = service.getDeviceStatus();
 		for(ShowDeviceStatus status : statusList){	
 			System.out.println("-------------------------------------");
 			System.out.println("ProductId:  " + status.getProductId());
@@ -30,15 +31,13 @@ public class DeviceServiceImplTest {
 			System.out.println("MassFlow:  " + status.isMassFlow());
 			System.out.println("carLiquid:  " + status.isCarLiquid());
 			System.out.println("CarPressure:  " + status.isCarPressure());
-			System.out.println("WeighFlow:  " + status.isWeighFlow());
-			System.out.println("GasFlow2:  " + status.isGasFlow2());
 			System.out.println("ZBOX:  " + status.isZBOX());
 		}
 	}
 	
 	@Test
 	public void test2() {
-		List<DeviceFaultInfo> dfi =	dsi.getFaultInfo(1);
+		List<DeviceFaultInfo> dfi =	service.getFaultInfo(1);
 		for(DeviceFaultInfo d : dfi){	
 			System.out.println("----------------------------");
 			System.out.println(d.getId());
@@ -52,14 +51,6 @@ public class DeviceServiceImplTest {
 		}
 	}
 	
-	@Test
-	public void test3() {
-		String name = dsi.getDataName(2);
-		
-			System.out.println(name);
-			
-		
-	}
 
 	@Test
 	public void test4(){
@@ -67,9 +58,18 @@ public class DeviceServiceImplTest {
 		String start = "2016-12-03";
 		String limit = "2016-12-05";
 			
-		List<Object> data = dsi.getData(1, 1, start, limit);
-		for(Object d : data)
-			System.out.println(d);
+		List<ShowData> data = service.getData(1, 1, start, limit);
+		for(ShowData d : data)
+			System.out.println(d.getTime() + ": " +d.getData());
 		
+	}
+	
+	@Test
+	public void test5(){
+		ShowDeviceStatus status = new ShowDeviceStatus();
+		status.setProductName("111");
+		service.setDeviceStatus(status, 2);
+		//System.out.println(status.getProductName());
+		System.out.println(status.isCarLiquid());
 	}
 }

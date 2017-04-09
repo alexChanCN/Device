@@ -11,6 +11,7 @@ public class Data2Device{
 	private int deviceId;
 	private int dataId;
 	private String dataName;
+	private String deviceName;
 	
 	@Id
 	@GeneratedValue
@@ -38,6 +39,12 @@ public class Data2Device{
 	}
 	public void setDataName(String dataName) {
 		this.dataName = dataName;
+	}
+	public String getDeviceName() {
+		return deviceName;
+	}
+	public void setDeviceName(String deviceName) {
+		this.deviceName = deviceName;
 	}
 	
 	

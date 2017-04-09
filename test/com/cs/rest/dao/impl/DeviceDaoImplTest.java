@@ -11,6 +11,7 @@ import org.junit.Test;
 
 import com.cs.rest.bean.Data2Device;
 import com.cs.rest.bean.DeviceFaultInfo;
+import com.cs.rest.bean.ShowData;
 
 public class DeviceDaoImplTest {
 
@@ -23,11 +24,12 @@ public class DeviceDaoImplTest {
 	}
 	
 	@Test
-	public void testGetDeviceId() {
-		List<Data2Device> data2Devices = dao.getData2Device();
-		for(Data2Device data2Device : data2Devices)
-			System.out.println(data2Device.getDataId() + "   " + data2Device.getDeviceId() + " " + data2Device.getDataName());
+	public void testGetDeviceInfo() {
+		Data2Device device = dao.getDeviceInfo(2);
+			System.out.println(device.getDataId() + "   " + device.getDataName() + " " 
+		+ device.getDeviceId() + "   " + device.getDeviceName());
 	}
+	
 	
 	@Test
 	public void testGetProductIdInfo() {
@@ -47,12 +49,12 @@ public class DeviceDaoImplTest {
 	
 	@Test
 	public void testGetData() {
-		String start = "2016-12-03";
-		String limit = "2016-12-05";
+		String start = "2016-12-04 16:28:40";
+		String limit = "2016-12-04 16:28:50";
 		
-		List<Object> data = dao.getData(1, 1, start, limit);
-		for(Object d : data)
-			System.out.println(d);
+		List<ShowData> data = dao.getData(1, 1, start, limit);
+		for(ShowData d : data)
+			System.out.println(d.getTime() + ":" + d.getData());
 	}
 
 }

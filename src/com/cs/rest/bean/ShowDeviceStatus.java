@@ -14,8 +14,8 @@ public class ShowDeviceStatus {
 	private boolean massFlow;				//质量流量计
 	private boolean carLiquid;				//槽车液位计
 	private boolean carPressure;			//槽车压力计
-	private boolean weighFlow;				//称重流量计
-	private boolean gasFlow2;				//气态流量计2
+	/*private boolean weighFlow;				//称重流量计
+	private boolean gasFlow2;				//气态流量计2*/
 	private boolean ZBOX;
 	
 
@@ -81,7 +81,7 @@ public class ShowDeviceStatus {
 	public void setCarPressure(boolean carPressure) {
 		this.carPressure = carPressure;
 	}
-	public boolean isWeighFlow() {
+	/*public boolean isWeighFlow() {
 		return weighFlow;
 	}
 	public void setWeighFlow(boolean weighFlow) {
@@ -92,7 +92,7 @@ public class ShowDeviceStatus {
 	}
 	public void setGasFlow2(boolean gasFlow2) {
 		this.gasFlow2 = gasFlow2;
-	}
+	}*/
 	public boolean isZBOX() {
 		return ZBOX;
 	}

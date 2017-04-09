@@ -33,5 +33,6 @@
         <mapping class="com.cs.rest.bean.Product"/>
         <mapping class="com.cs.rest.bean.Data2Device"/>
         <mapping class="com.cs.rest.bean.SensorData"/>
+        <mapping class="com.cs.rest.bean.ShowData"/>
     </session-factory>
 </hibernate-configuration>

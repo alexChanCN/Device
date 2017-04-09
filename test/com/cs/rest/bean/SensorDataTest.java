@@ -2,8 +2,13 @@ package com.cs.rest.bean;
 
 import static org.junit.Assert.*;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.sql.Time;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Query;
@@ -75,16 +80,38 @@ public class SensorDataTest {
 		Session s = sf.getCurrentSession();
 		s.beginTransaction();
 
-		Query q = s.createQuery("SELECT s." + dataName +" FROM SensorData s WHERE s.date >= '" + starttime + "' AND s.date <= '" 
-				+ limittime + "' AND s.productId = '" + productId + "' ORDER BY s.date ASC");	
+		/*Query q = s.createQuery("SELECT s.date, s." + dataName +" FROM SensorData s WHERE s.date >= '" + starttime + "' AND s.date <= '" 
+				+ limittime + "' AND s.productId = '" + productId + "' ORDER BY s.date ASC");*/
+		Query q = s.createQuery("SELECT new com.cs.rest.bean.ShowData(s.date, s." + dataName + ") FROM SensorData s WHERE s.date >= '" + starttime + "' AND s.date <= '" 
+				+ limittime + "' AND s.productId = '" + productId + "' ORDER BY s.date ASC");
 		
-		List<Object> ss = q.list();
-		for(Object sd : ss)
+		List<ShowData> sds = q.list();
+		for(ShowData sd : sds)
 		{
-			System.out.println(sd);
+			System.out.println(sd.getTime());
+			System.out.println(sd.getData());
+			
 		}
 		s.getTransaction().commit();
 			
 	}
+	@Test
+	public void testMethod() throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+		SensorData s = new SensorData();
+        List<String> list = new ArrayList<String>();
+
+        list.add("getId");
+        list.add("getDate");
+ 
+        
+        for (String str : list) {
+
+            Method method = s.getClass().getMethod(str, new Class[0]);
+            System.out.println(str + "():  Get Value is   " + method.invoke(s, new Object[0]));
+        }
+    }
+	
+		
+	
 	//
 }

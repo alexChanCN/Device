@@ -15,6 +15,7 @@ import javax.ws.rs.core.MediaType;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.cs.rest.bean.DeviceFaultInfo;
+import com.cs.rest.bean.ShowData;
 import com.cs.rest.bean.ShowDeviceStatus;
 import com.cs.rest.service.DeviceService;
 import com.cs.rest.service.impl.DeviceServiceImpl;
@@ -53,9 +54,9 @@ public class DeviceResource {
     @GET
     @Path("getErrorDataInfo/{productId}/{dataId}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Object> getErrorDataInfo(@PathParam("productId") int productId, 
+    public List<ShowData> getErrorDataInfo(@PathParam("productId") int productId, 
     		@PathParam("productId") int dataId, @QueryParam("start") String start, @QueryParam("limit") String limit){
-    	List<Object> data = new ArrayList<Object>();
+    	List<ShowData> data = new ArrayList<ShowData>();
     	data = deviceService.getData(productId, dataId, start, limit);	
     	return data;
     	
