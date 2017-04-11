@@ -1,28 +1,26 @@
 package com.cs.rest.dao.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.springframework.stereotype.Repository;
 
 import com.cs.rest.bean.Data2Device;
 import com.cs.rest.bean.DeviceFaultInfo;
 import com.cs.rest.bean.Product;
 import com.cs.rest.bean.ShowData;
 import com.cs.rest.dao.DeviceDao;
-import com.cs.rest.service.DeviceService;
-import com.cs.rest.service.impl.DeviceServiceImpl;
 import com.cs.rest.util.HibernateUtil;
 import com.cs.rest.util.DateUtil;
 
+@Repository
 public class DeviceDaoImpl implements DeviceDao{
 
+	
+	private static List<Data2Device> table;				//data2device缓存，避免重复查询数据库
 	
 	@Override
 	public List<DeviceFaultInfo> getRecInfo() {
@@ -106,17 +104,20 @@ public class DeviceDaoImpl implements DeviceDao{
 	
 	@Override
 	public List<Data2Device> getDeviceInfo() {
+		
+		if(table == null){
+			
 		SessionFactory sessionFactory = HibernateUtil.getSessionFactory();   
         Session s = null;  
         Transaction t = null;  
-        List<Data2Device> deviceInfo = null;  
+        //List<Data2Device> deviceInfo = null;  
         try{  
          s = sessionFactory.openSession();  
          t = s.beginTransaction();  
          String hql = "FROM Data2Device d";
          Query query = s.createQuery(hql);    
          query.setCacheable(true); // 设置缓存    
-         deviceInfo = query.list();    
+         table = query.list();    
          t.commit();  
         }catch(Exception err){  
         t.rollback();  
@@ -124,7 +125,8 @@ public class DeviceDaoImpl implements DeviceDao{
         }finally{  
         s.close();  
         }  
-        return deviceInfo;
+		}
+        return table;
 	}
 
 	@Override
@@ -161,7 +163,6 @@ public class DeviceDaoImpl implements DeviceDao{
         Session s = null;  
         Transaction t = null;  
         List<ShowData> data = null;  
-        String date = DateUtil.getPreDay();
         try{  
          s = sessionFactory.openSession();  
          t = s.beginTransaction();  

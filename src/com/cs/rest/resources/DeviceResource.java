@@ -1,7 +1,6 @@
 package com.cs.rest.resources;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -18,14 +17,13 @@ import com.cs.rest.bean.DeviceFaultInfo;
 import com.cs.rest.bean.ShowData;
 import com.cs.rest.bean.ShowDeviceStatus;
 import com.cs.rest.service.DeviceService;
-import com.cs.rest.service.impl.DeviceServiceImpl;
 
 @Path("/device")
 public class DeviceResource {
 	private static final Logger LOGGER = Logger.getLogger(DeviceResource.class.getName());
     
-    //@Autowired
-    private DeviceService deviceService = new DeviceServiceImpl();
+    @Autowired
+    private DeviceService deviceService;
     
     public DeviceResource() {
         LOGGER.fine("DeviceResource()");

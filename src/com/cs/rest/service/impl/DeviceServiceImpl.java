@@ -5,13 +5,10 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import org.hibernate.Query;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.AnnotationConfiguration;
-import org.junit.BeforeClass;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.cs.rest.bean.Data2Device;
 import com.cs.rest.bean.DeviceFaultInfo;
@@ -19,18 +16,15 @@ import com.cs.rest.bean.Product;
 import com.cs.rest.bean.ShowData;
 import com.cs.rest.bean.ShowDeviceStatus;
 import com.cs.rest.dao.DeviceDao;
-import com.cs.rest.dao.impl.DeviceDaoImpl;
 import com.cs.rest.service.DeviceService;
 
+@Service
 public class DeviceServiceImpl implements DeviceService{
 
-	private DeviceDao deviceDao = new DeviceDaoImpl();
+	@Autowired
+	private DeviceDao deviceDao;
 	
-	private static List<Data2Device> table;
-	
-	public void getTable() {
-			table = deviceDao.getDeviceInfo();      //data2device缓存，避免重复查询数据库
-	}
+
 	
 	@Override
 	public List<ShowDeviceStatus> getDeviceStatus() {
@@ -71,8 +65,7 @@ public class DeviceServiceImpl implements DeviceService{
 	@Override
 	public void setDeviceStatus(ShowDeviceStatus status, int dataId){
 		String deviceName = null;
-		if(table == null)
-			table = deviceDao.getDeviceInfo();
+		List<Data2Device> table = deviceDao.getDeviceInfo();
 		deviceName = getDevice(table, dataId).getDeviceName();
 		if(deviceName != null){
 			PropertyDescriptor pd;
