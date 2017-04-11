@@ -1,6 +1,6 @@
 # Device
 v1.1
 v1.2
-    1）完善显示data时间
-    2）@auotowired
-    3）@repository、@service
+ 聽  1锛夊畬鍠勬樉绀篸ata鏃堕棿
+ 聽  2锛堾auotowired
+ 聽  3锛堾repository锛孈service
